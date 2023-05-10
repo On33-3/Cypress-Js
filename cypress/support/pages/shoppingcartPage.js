@@ -1,14 +1,21 @@
-export class ShoppingCart{
+export class ShoppingCart {
 
-    verifyNameProduct(productName){
-        cy.contains(productName).should('exist');
+    verifyNameProduct(productName) {
+        return cy.xpath(`//p[contains(text(),"${productName}")]`);
 
     }
-
-
-    verifyPriceTotal(price1 , price2){
-        cy.contains('Show total price').click();
-        cy.contains(price1 + price2).should('exist');
+    verifyProductPrice(producto, precio) {
+        cy.xpath(`//p[contains(text(),"${producto}")]
+        //following-sibling::p[@name="${precio}"]`)
+            .should("exist");
     }
+
+    clickShowTotalPrice() {
+        cy.xpath("//button[contains(text(),'Show total price')]").click();
+    };
+
+    verifyTotalPrice(total) {
+        return cy.contains(total);
+    };
 
 }

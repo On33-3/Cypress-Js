@@ -4,4 +4,7 @@ export class ProductPage {
         cy.get('#closeModal').click();
     }
 
+        goToshoppingCart(){
+            cy.xpath('//*[@id="goShoppingCart"]').click();
+        }
 }

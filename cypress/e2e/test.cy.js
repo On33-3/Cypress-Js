@@ -15,20 +15,16 @@ let products;
 
 
 
-
-before("Set the values in a variable for user login", () => {
+before("Set the values in a variable for user & product", () => {
 
     cy.fixture("loginData").then((data) => {
         loginData = data;
     })
-})
-
-before("Set the values in a variable for product selection", () => {
-
     cy.fixture("productsFix").then((data1) => {
         products = data1;
     })
 })
+
 
 describe("Pre entrega", () => {
 
@@ -42,10 +38,16 @@ describe("Pre entrega", () => {
         homePage.selectOnlineShop();
         productPage.addProduct(products.product1.name);
         productPage.addProduct(products.product2.name);
-        cy.xpath('//*[@id="goShoppingCart"]').click();
-        shoppingCartPage.verifyNameProduct(products.product1.name);
-        shoppingCartPage.verifyNameProduct(products.product2.name);
-        shoppingCartPage.verifyPriceTotal(products.product1.price , products.product2.price);
+        productPage.goToshoppingCart();
+       
+        shoppingCartPage.verifyNameProduct(products.product1.name).should('have.text', products.product1.name );
+        shoppingCartPage.verifyNameProduct(products.product2.name).should('have.text', products.product2.name );;
+        shoppingCartPage.verifyProductPrice(products.product1.name , products.product1.price);
+        shoppingCartPage.verifyProductPrice(products.product2.name , products.product2.price);
+        shoppingCartPage.clickShowTotalPrice();
+        let aux = (products.product1.price + products.product2.price);
+        shoppingCartPage.verifyTotalPrice(aux).should("have.text", aux);
+        
     })
 
 

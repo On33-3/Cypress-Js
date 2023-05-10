@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cypress run --spec 'cypress/e2e/test.cy.js'"
+    
+   
   },
   "keywords": [],
   "author": "",
