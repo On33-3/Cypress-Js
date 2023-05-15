@@ -18,4 +18,8 @@ export class ShoppingCart {
         return cy.contains(total);
     };
 
+    goToCheckOut() {
+        cy.contains("Go to Checkout").click();
+
+    }
 }

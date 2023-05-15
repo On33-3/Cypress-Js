@@ -1,8 +1,6 @@
 export class HomePage {
-
-
-
-    selectOnlineShop(){
+    
+    selectOnlineShop() {
         cy.xpath('//*[@id="onlineshoplink"]').click();
     }
 
